@@ -41,19 +41,25 @@ func TestProduct_Disable(t *testing.T) {
 }
 
 func TestProduct_IsValid(t *testing.T) {
-	// product := application.Product{
-	// 	uuid.New().String(),
-	// 	"Phone",
-	// 	0,
-	// 	application.ENABLED,
-	// }
+	product := application.Product{
+		uuid.New().String(),
+		"Phone",
+		10,
+		application.ENABLED,
+	}
 
-	// _, err := product.IsValid()
-	// require.Nil(t, err)
+	_, err := product.IsValid()
+	require.Nil(t, err)
 
-	// product.Status = application.ENABLED
-	// product.Price = -10
+	product.Status = "INVALID"
+	_, err = product.IsValid()
+	require.Equal(t, "the status must be enabled or disabled", err.Error())
 
-	// _, err = product.IsValid()
-	// require.Equal(t, "the status must be greater or equal zero", err.Error())
+	product.Status = application.ENABLED
+	_, err = product.IsValid()
+	require.Nil(t, err)
+
+	product.Price = -10
+	_, err = product.IsValid()
+	require.Equal(t, "the status must be greater or equal zero", err.Error())
 }

@@ -26,18 +26,22 @@ const (
 )
 
 type Product struct {
-	ID     string  `valid:uuidv4`
-	Name   string  `valid:required`
-	Price  float64 `valid:float,optional`
-	Status string  `valid:required`
+	ID     string  `valid:"uuidv4"`
+	Name   string  `valid:"required"`
+	Price  float64 `valid:"float,optional"`
+	Status string  `valid:"required"`
 }
 
 func (p *Product) IsValid() (bool, error) {
-	if p.Status != ENABLED {
+	if p.Status == "" {
 		p.Status = DISABLED
 	}
 
-	if p.Price <= 0 {
+	if p.Status != ENABLED && p.Status != DISABLED {
+		return false, errors.New("the status must be enabled or disabled")
+	}
+
+	if p.Price < 0 {
 		return false, errors.New("the status must be greater or equal zero")
 	}
 
@@ -69,17 +73,17 @@ func (p *Product) Disabled() error {
 }
 
 func (p *Product) GetID() string {
-	return ""
+	return p.ID
 }
 
 func (p *Product) GetName() string {
-	return ""
+	return p.Name
 }
 
 func (p *Product) GetStatus() string {
-	return ""
+	return p.Status
 }
 
 func (p *Product) GetPrice() float64 {
-	return 0
+	return p.Price
 }
