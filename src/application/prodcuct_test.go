@@ -3,7 +3,7 @@ package application_test
 import (
 	"testing"
 
-	"github.com/brunohubner/fc2-hexagonal-architecture/application"
+	"github.com/brunohubner/fc2-hexagonal-architecture/src/application"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 )

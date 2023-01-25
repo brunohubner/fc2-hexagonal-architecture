@@ -3,8 +3,8 @@ package application_test
 import (
 	"testing"
 
-	"github.com/brunohubner/fc2-hexagonal-architecture/application"
-	mock_application "github.com/brunohubner/fc2-hexagonal-architecture/application/mocks"
+	"github.com/brunohubner/fc2-hexagonal-architecture/src/application"
+	mock_application "github.com/brunohubner/fc2-hexagonal-architecture/src/application/mocks"
 	"github.com/golang/mock/gomock"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
