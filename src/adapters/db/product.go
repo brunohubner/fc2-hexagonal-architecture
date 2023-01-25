@@ -18,7 +18,9 @@ func NewProductDb(db *sql.DB) *ProductDb {
 func (p *ProductDb) Get(id string) (application.IProduct, error) {
 	var product application.Product
 
-	stmt, err := p.db.Prepare("select id, name, price, status from products where id = ?")
+	stmt, err := p.db.Prepare(`
+		select id, name, price, status from products where id = ?
+	`)
 	if err != nil {
 		return nil, err
 	}
@@ -29,6 +31,11 @@ func (p *ProductDb) Get(id string) (application.IProduct, error) {
 
 	return &product, nil
 }
+
 func (p *ProductDb) Save(product application.IProduct) (application.IProduct, error) {
+	return &application.Product{}, nil
+}
+
+func (p *ProductDb) create(product application.IProduct) (application.IProduct, error) {
 	return &application.Product{}, nil
 }
