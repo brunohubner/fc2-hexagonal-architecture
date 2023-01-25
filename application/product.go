@@ -4,6 +4,7 @@ import (
 	"errors"
 
 	"github.com/asaskevich/govalidator"
+	"github.com/google/uuid"
 )
 
 func init() {
@@ -12,12 +13,32 @@ func init() {
 
 type IProduct interface {
 	IsValid() (bool, error)
-	Enabled() error
-	Disabled() error
+	Enable() error
+	Disable() error
 	GetID() string
 	GetName() string
 	GetStatus() string
 	GetPrice() float64
+}
+
+type IProductService interface {
+	Get(id string) (IProduct, error)
+	Create(name string, price float64) (IProduct, error)
+	Enable(product IProduct) (IProduct, error)
+	Disable(product IProduct) (IProduct, error)
+}
+
+type IProductReader interface {
+	Get(id string) (IProduct, error)
+}
+
+type IProductWriter interface {
+	Save(product IProduct) (IProduct, error)
+}
+
+type IProductPersistence interface {
+	IProductReader
+	IProductWriter
 }
 
 const (
@@ -30,6 +51,13 @@ type Product struct {
 	Name   string  `valid:"required"`
 	Price  float64 `valid:"float,optional"`
 	Status string  `valid:"required"`
+}
+
+func NewProduct() *Product {
+	return &Product{
+		ID:     uuid.New().String(),
+		Status: DISABLED,
+	}
 }
 
 func (p *Product) IsValid() (bool, error) {
@@ -52,7 +80,7 @@ func (p *Product) IsValid() (bool, error) {
 	return true, nil
 }
 
-func (p *Product) Enabled() error {
+func (p *Product) Enable() error {
 	if p.Price <= 0 {
 		return errors.New("the price must be greater than zero to enable the product")
 	}
@@ -62,7 +90,7 @@ func (p *Product) Enabled() error {
 	return nil
 }
 
-func (p *Product) Disabled() error {
+func (p *Product) Disable() error {
 	if p.Price > 0 {
 		return errors.New("the price must be zero in order to have the product disabled")
 	}

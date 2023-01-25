@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestProduct_Enabled(t *testing.T) {
+func TestProduct_Enable(t *testing.T) {
 	product := application.Product{
 		"1",
 		"Phone",
@@ -16,11 +16,11 @@ func TestProduct_Enabled(t *testing.T) {
 		application.ENABLED,
 	}
 
-	err := product.Enabled()
+	err := product.Enable()
 	require.Nil(t, err)
 
 	product.Price = 0
-	err = product.Enabled()
+	err = product.Enable()
 	require.Equal(t, "the price must be greater than zero to enable the product", err.Error())
 }
 
@@ -32,11 +32,11 @@ func TestProduct_Disable(t *testing.T) {
 		application.ENABLED,
 	}
 
-	err := product.Disabled()
+	err := product.Disable()
 	require.Nil(t, err)
 
 	product.Price = 10
-	err = product.Disabled()
+	err = product.Disable()
 	require.Equal(t, "the price must be zero in order to have the product disabled", err.Error())
 }
 
