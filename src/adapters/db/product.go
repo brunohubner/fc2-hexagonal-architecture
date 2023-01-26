@@ -2,7 +2,6 @@ package db
 
 import (
 	"database/sql"
-	"fmt"
 
 	"github.com/brunohubner/fc2-hexagonal-architecture/src/application"
 	_ "github.com/mattn/go-sqlite3"
@@ -38,7 +37,6 @@ func (p *ProductDb) Save(product application.IProduct) (application.IProduct, er
 	p.db.QueryRow(`
 		select count(id) from products where id = ?
 	`, product.GetID()).Scan(&rows)
-	fmt.Print("ROWS", rows)
 	if rows == 0 {
 		if _, err := p.create(product); err != nil {
 			return nil, err
