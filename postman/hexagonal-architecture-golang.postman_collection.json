@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "141f2de5-d777-4ef4-8e5e-61364b150783",
+		"name": "Hexagonal Architecture Golang",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25147635"
+	},
+	"item": [
+		{
+			"name": "Create Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\": \"Postman\",\r\n\t\"price\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Product",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/products/17565837-7c46-4792-8c71-10e8324cfcde",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"17565837-7c46-4792-8c71-10e8324cfcde"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Enable Product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\": \"\",\r\n\t\"price\": -100,\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/products/cd6d97fa-0069-4f78-9785-7ec28bb568a0/enable",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"cd6d97fa-0069-4f78-9785-7ec28bb568a0",
+						"enable"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Disable Product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\": \"\",\r\n\t\"price\": -100,\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/products/17565837-7c46-4792-8c71-10e8324cfcde/disable",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"17565837-7c46-4792-8c71-10e8324cfcde",
+						"disable"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
